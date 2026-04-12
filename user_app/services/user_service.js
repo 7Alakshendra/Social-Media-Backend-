@@ -1,7 +1,7 @@
 const User=require('../models/user');
 const Follow=require('../models/follow');
 
-class UserServuce{
+class UserService{
     async getAllUsers(){
         console.log("user name alpha beta gamma!");
         return await User.find({});
@@ -16,13 +16,28 @@ class UserServuce{
     }
 
     async createUser(userData){
-        const user=new User(userData);
+        const hashedPassword = await bcrypt.hash(userData.password, 10);
+    //                                                           ↑
+    //                                                  salt rounds — just use 10
+
+    const user = new User({ ...userData, password: hashedPassword });
         await user.save();
 
         return user;
     }
     async loginUser(email,password){
-   
+     const user=await User.findOne({email:email});
+     if(!user){
+        throw new Error('User Not Found');
+     }
+     const isMatch = await bcrypt.compare(password, user.password);
+
+if (!isMatch) {
+    throw new Error("Invalid password");
+}
+     return user;
+
+
     }
     async followUser(username){
         

@@ -24,7 +24,7 @@ class UserController{
 //differentiate between the body and the parameters of a request
     async createUser(req,res){
          try{
-            const usrData=req.bdoy;
+            const userData=req.bdoy;
             const user= await userService.createUser(userData);
             res.status(201).json(user);
          }
@@ -49,3 +49,4 @@ class UserController{
 
     }
 }
+module.exports = new UserController();
