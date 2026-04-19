@@ -18,7 +18,7 @@ class UserService{
     async createUser(userData){
         const hashedPassword = await bcrypt.hash(userData.password, 10);
     //                                                           ↑
-    //                                                  salt rounds — just use 10
+    //                                                  salt rounds 
 
     const user = new User({ ...userData, password: hashedPassword });
         await user.save();
@@ -39,12 +39,22 @@ if (!isMatch) {
 
 
     }
-    async followUser(username){
-        
+    async followUser(followerId,followingId){
+        const user=await User.findOne({followingId});
+
+     if(!user){
+        throw new Error('User Not Found');
+     }
+     const follow=new Follow({following:followingId, follower:followerId});
+     await follow.save;
+
+     return follow;
+
     }
     async unfollowUser(req,res){
 
     }
+
     async getFollowers(username){
           
     }
