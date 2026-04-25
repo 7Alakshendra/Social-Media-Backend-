@@ -51,8 +51,9 @@ if (!isMatch) {
      return follow;
 
     }
+    
     async unfollowUser(req,res){
-
+       
     }
 
     async getFollowers(username){

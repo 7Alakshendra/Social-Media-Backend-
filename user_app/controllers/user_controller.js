@@ -34,9 +34,27 @@ class UserController{
     }
 
     async loginUser(req,res){
-         
+         try{
+            const { email, password } = req.body;
+            const user= await userService.loginUser(email,password);
+            res.status(200).json(user);
+         }
+         catch(error){
+            res.status(400).json({error: error.message});
+         }
     }
+
     async followUser(req,res){
+    try{
+      const {followerId}=req.body;
+      const {followingId}=req.params;
+
+     const follow = await userService.followUser(followerId,followingId);
+     res.status(201).json(follow); 
+}
+catch(error){
+    res.status(400).json({ error: error.message });
+}
 
     }
     async unfollowUser(req,res){
