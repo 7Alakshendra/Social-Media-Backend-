@@ -17,11 +17,11 @@ router.post('/users/login',userController.loginUser.bind(userController));
 
 //follow/unfollow routes
 
-//router.post('/users/:followedID/follow',userController.followUser.bind(userController));
+router.post('/users/:followingId/followerId',userController.followUser.bind(userController));
 
 //router.delete('/users/:followedID/unfollow',userController.unfollowUser.bind(userController));
 
-//router.get('/users/:userID/followers',userController.getfollowers.bind(userController));
+router.get('/users/:userID/followers',userController.getFollowers.bind(userController));
 
 //router.get('/users/:userID/following',userController.getfollowing.bind(userController));
 

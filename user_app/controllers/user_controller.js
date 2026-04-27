@@ -24,7 +24,7 @@ class UserController{
 //differentiate between the body and the parameters of a request
     async createUser(req,res){
          try{
-            const userData=req.bdoy;
+            const userData=req.body;
             const user= await userService.createUser(userData);
             res.status(201).json(user);
          }

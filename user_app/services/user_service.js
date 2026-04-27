@@ -1,5 +1,6 @@
 const User=require('../models/user');
 const Follow=require('../models/follow');
+const bcrypt = require('bcryptjs');
 
 class UserService{
     async getAllUsers(){
@@ -46,7 +47,7 @@ if (!isMatch) {
         throw new Error('User Not Found');
      }
      const follow=new Follow({following:followingId, follower:followerId});
-     await follow.save;
+     await follow.save();
 
      return follow;
 
@@ -63,3 +64,5 @@ if (!isMatch) {
        
     }
 }
+
+module.exports = new UserService();
